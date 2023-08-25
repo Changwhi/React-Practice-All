@@ -2,13 +2,17 @@ import classes from './CartButton.module.css';
 import { useDispatch } from 'react-redux';
 import { cartAction } from '../../Store/cart';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const CartButton = (props) => {
     const [quantity, setQuantity] = useState(0);
-    const items = useSelector(state => state.cart.items);
-    items.map(item => setQuantity(prev => {return prev+item.quantity}))
 
+    const items = useSelector(state => state.cart.items);
+
+    useEffect(() => {
+        setQuantity(0);
+        items.map(item => setQuantity(prev => { return prev + item.quantity }))
+    }, [items])
 
     const dispatch = useDispatch();
     const cartToggleHandler = () => {
