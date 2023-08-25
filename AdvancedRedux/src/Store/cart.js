@@ -10,12 +10,12 @@ const cartSlice = createSlice({
             state.isExpanded = !state.isExpanded
         },
         increment(state, action) {
-            const currentItem = state.items.find(item => item.itemId === action.payload.itemId)
+            const currentItem = state.items.find(item => item.itemId === action.payload)
             currentItem.quantity++;
             currentItem.totalAmount = currentItem.totalAmount + currentItem.price;
         },
         decrement(state, action) {
-            const currentItem = state.items.find(item => item.itemId === action.payload.itemId)
+            const currentItem = state.items.find(item => item.itemId === action.payload)
             const index = state.items.indexOf(currentItem);
 
             if (currentItem.quantity <= 1) {
