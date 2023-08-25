@@ -29,6 +29,7 @@ const cartSlice = createSlice({
             const currentItem = state.items.find(item => item.itemId === action.payload.itemId)
             if (!currentItem) {
                 state.items.push({
+                    key: action.payload.itemId,
                     price: action.payload.price,
                     itemId: action.payload.itemId,
                     quantity: 1,
