@@ -27,7 +27,6 @@ const cartSlice = createSlice({
         },
         addToCart(state, action) {
             const currentItem = state.items.find(item => item.itemId === action.payload.itemId)
-
             if (!currentItem) {
                 state.items.push({
                     price: action.payload.price,
@@ -35,7 +34,7 @@ const cartSlice = createSlice({
                     quantity: 1,
                     title: action.payload.title,
                     content: action.payload.content,
-                    totalAmount: action.payload.totalAmount
+                    totalAmount: action.payload.price
                 })
             }
             else {
