@@ -1,15 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {isExpanded: false, items:[], totalAmount: 0}
+const initialState = { isExpanded: false, items: [], totalAmount: 0 }
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
-    reducers:{
+    reducers: {
         toggle(state) {
             state.isExpanded = !state.isExpanded
         },
         increment(state, action) {
+            const currentItem = state.items.find(item => item.itemId === action.payload.itemId)
+            currentItem.quantity++;
+            currentItem.totalAmount = currentItem.totalAmount + currentItem.price;
+        },
+        decrement(state, action) {
+            const currentItem = state.items.find(item => item.itemId === action.payload.itemId)
+            const index = state.items.indexOf(currentItem);
+
+            if (currentItem.quantity <= 1) {
+                state.items.splice(index, 1);
+            } else {
+                currentItem.quantity--;
+                currentItem.totalAmount = currentItem.totalAmount - currentItem.price;
+            }
+        },
+        addToCart(state, action) {
             const currentItem = state.items.find(item => item.itemId === action.payload.itemId)
 
             if (!currentItem) {
@@ -26,12 +42,6 @@ const cartSlice = createSlice({
                 currentItem.totalAmount = currentItem.totalAmount + currentItem.price;
                 currentItem.quantity++;
             }
-        },
-        decrement(state) {
-
-        },
-        addToCart(state) {
-
         }
     }
 });
