@@ -10,16 +10,18 @@ function App() {
     const cart = useSelector(state => state.cart.items)
 
     useEffect(() => {
-        const response = async () => {
-            await fetch('https://react-food-ordering-ff3f4-default-rtdb.firebaseio.com/cart.json',
+        const sendCartData = async () => {
+            const response = await fetch('https://react-food-ordering-ff3f4-default-rtdb.firebaseio.com/cart.json',
                 {
                     method: 'PUT',
                     body: JSON.stringify(cart)
                 })
+            const responseData = await response.json();
+            console.log(responseData)
+
         };
-        response().catch(err => {
-            console.log(err)
-        })
+
+        sendCartData();
     }, [cart]);
 
 
