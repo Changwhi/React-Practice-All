@@ -8,7 +8,7 @@ const DUMMY = [{
     description: 'This is a first product - amazing!'
 },
 {
-    itemId:2,
+    itemId: 2,
     title: 'Test2',
     price: 2,
     description: 'This is a second product - amazing!'
