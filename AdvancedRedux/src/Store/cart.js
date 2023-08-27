@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { isExpanded: false, items: [], notification: null }
+const initialState = { isExpanded: false, items: [], notification: null, changed: false }
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -10,11 +10,13 @@ const cartSlice = createSlice({
             state.isExpanded = !state.isExpanded
         },
         increment(state, action) {
+            state.changed = true;
             const currentItem = state.items.find(item => item.itemId === action.payload)
             currentItem.quantity++;
             currentItem.totalAmount = currentItem.totalAmount + currentItem.price;
         },
         decrement(state, action) {
+            state.changed = true;
             const currentItem = state.items.find(item => item.itemId === action.payload)
             const index = state.items.indexOf(currentItem);
 
@@ -26,6 +28,7 @@ const cartSlice = createSlice({
             }
         },
         addToCart(state, action) {
+            state.changed = true;
             const currentItem = state.items.find(item => item.itemId === action.payload.itemId)
             if (!currentItem) {
                 state.items.push({
@@ -49,6 +52,9 @@ const cartSlice = createSlice({
                 title: action.payload.title,
                 message: action.payload.message
             }
+        },
+        replaceCart(state, action) {
+            state.items = action.payload;
         }
 
     }
