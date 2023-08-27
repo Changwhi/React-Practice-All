@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { cartAction } from './Store/cart';
 import Notification from './components/UI/Notification';
 
+let initSendRequest = false
+
 function App() {
     const dispatch = useDispatch();
     const isExpanded = useSelector(state => state.cart.isExpanded)
@@ -13,6 +15,11 @@ function App() {
     const notification = useSelector(state => state.cart.notification)
 
     useEffect(() => {
+        if (!initSendRequest) {
+            initSendRequest = true
+            return
+        }
+
         dispatch(cartAction.notification({
             status: 'Pending',
             title: 'sending',
