@@ -3,8 +3,8 @@ import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { cartAction } from './Store/cart';
 import Notification from './components/UI/Notification';
+import { sendCartData } from './Store/Cart-action';
 
 let initSendRequest = false
 
@@ -19,37 +19,8 @@ function App() {
             initSendRequest = true
             return
         }
+        dispatch(sendCartData(cart));
 
-        dispatch(cartAction.notification({
-            status: 'Pending',
-            title: 'sending',
-            message: 'Seding reqeust...'
-        }));
-
-        const sendCartData = async () => {
-            const response = await fetch('https://react-food-ordering-ff3f4-default-rtdb.firebaseio.com/cart.json',
-                {
-                    method: 'PUT',
-                    body: JSON.stringify(cart)
-                })
-
-            if (!response.ok) {
-                throw new Error("sending request failed")
-            }
-            //const responseData = await response.json();
-
-            dispatch(cartAction.notification({
-                status: 'success',
-                title: 'Suceess',
-                message: 'Sent a data successfully'
-            }))
-        };
-        sendCartData().catch(err => {
-            dispatch(cartAction.notification({
-                status: 'error',
-                title: 'Error',
-                message: 'Sending a data failed'
-            }))});
     }, [cart, dispatch]);
 
 
