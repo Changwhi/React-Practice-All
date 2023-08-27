@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { isExpanded: false, items: [], totalAmount: 0 }
+const initialState = { isExpanded: false, items: [], notification: null }
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -42,9 +42,18 @@ const cartSlice = createSlice({
                 currentItem.totalAmount = currentItem.totalAmount + currentItem.price;
                 currentItem.quantity++;
             }
+        },
+        notification(state, action) {
+            state.notification = {
+                status: action.payload.status,
+                title: action.payload.title,
+                message: action.payload.message
+            }
         }
+
     }
 });
+
 
 export default cartSlice.reducer;
 export const cartAction = cartSlice.actions;
