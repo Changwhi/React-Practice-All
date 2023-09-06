@@ -5,7 +5,9 @@ import MainNavegation from '../components/MainNavigation';
 const Roots = () => {
     return <React.Fragment>
         <MainNavegation />
-        <Outlet />
+        <main>
+            <Outlet />
+        </main>
     </React.Fragment>
 };
 
