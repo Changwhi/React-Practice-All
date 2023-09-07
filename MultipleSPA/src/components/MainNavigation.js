@@ -7,11 +7,11 @@ const MainNavegation = () => {
             <ul className={classes.list}>
                 <li>
                     <NavLink className={({ isActive }) =>
-                        isActive ? classes.active : undefined} to='/'>Main</NavLink >
+                        isActive ? classes.active : undefined} to=''>Main</NavLink >
                 </li>
                 <li>
                     <NavLink className={({ isActive }) =>
-                        isActive ? classes.active : undefined} to='/product'>Product</NavLink >
+                        isActive ? classes.active : undefined} to='product'>Product</NavLink >
                 </li>
             </ul>
         </nav>

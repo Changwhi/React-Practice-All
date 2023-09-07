@@ -4,11 +4,11 @@ const DUMMY = [
     {productId: 1, productName: 'product1'},
     {productId: 2, productName: 'product2'},
     {productId: 3, productName: 'product3'},
+    {productId: 4, productName: 'Felix'},
 ]
 
 
 const Product = () => {
-
     return <>
         <h2>Product page</h2>
         <ul>
